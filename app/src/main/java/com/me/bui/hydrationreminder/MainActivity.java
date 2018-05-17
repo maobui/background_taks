@@ -15,6 +15,7 @@
  */
 package com.me.bui.hydrationreminder;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -24,6 +25,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.me.bui.hydrationreminder.sync.ReminderTasks;
+import com.me.bui.hydrationreminder.sync.WaterReminderIntentService;
 import com.me.bui.hydrationreminder.utils.PreferenceUtilities;
 
 public class MainActivity extends AppCompatActivity implements
@@ -81,8 +84,11 @@ public class MainActivity extends AppCompatActivity implements
         mToast = Toast.makeText(this, R.string.water_chug_toast, Toast.LENGTH_SHORT);
         mToast.show();
         // TODO (15) Create an explicit intent for WaterReminderIntentService
+        Intent incrementWaterIntent = new Intent(this, WaterReminderIntentService.class);
         // TODO (16) Set the action of the intent to ACTION_INCREMENT_WATER_COUNT
+        incrementWaterIntent.setAction(ReminderTasks.ACTION_INCREMENT_WATER_COUNT);
         // TODO (17) Call startService and pass the explicit intent you just created
+        startService(incrementWaterIntent);
     }
 
     @Override
