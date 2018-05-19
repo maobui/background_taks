@@ -12,3 +12,9 @@ https://classroom.udacity.com/courses/ud851/lessons/f5ef4e52-c485-4c85-a26a-3231
 ![](/images/service_lifecycle.png)
 
 ![](/images/intent_service.png)
+
+### Intents vs PendingIntents
+
+![](/images/intents.png)
+
+![](/images/pedingintents.png)

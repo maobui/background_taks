@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 import com.me.bui.hydrationreminder.sync.ReminderTasks;
 import com.me.bui.hydrationreminder.sync.WaterReminderIntentService;
+import com.me.bui.hydrationreminder.utils.NotificationUtils;
 import com.me.bui.hydrationreminder.utils.PreferenceUtilities;
 
 public class MainActivity extends AppCompatActivity implements
@@ -110,5 +111,9 @@ public class MainActivity extends AppCompatActivity implements
         } else if (PreferenceUtilities.KEY_CHARGING_REMINDER_COUNT.equals(key)) {
             updateChargingReminderCount();
         }
+    }
+
+    public void testNotification(View view) {
+        NotificationUtils.remindUserBecauseCharging(this);
     }
 }
