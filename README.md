@@ -18,3 +18,13 @@ https://classroom.udacity.com/courses/ud851/lessons/f5ef4e52-c485-4c85-a26a-3231
 ![](/images/intents.png)
 
 ![](/images/pedingintents.png)
+
+### Foreground Service
+
+![](/images/foreground_service.png)
+
+### Application priority
+
+![](/images/app_priority.png)
+
+![](/images/three_laws.png)
