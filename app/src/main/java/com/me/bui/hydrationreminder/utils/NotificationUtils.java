@@ -16,6 +16,8 @@ import android.support.v4.content.ContextCompat;
 
 import com.me.bui.hydrationreminder.MainActivity;
 import com.me.bui.hydrationreminder.R;
+import com.me.bui.hydrationreminder.sync.ReminderTasks;
+import com.me.bui.hydrationreminder.sync.WaterReminderIntentService;
 
 /**
  * Created by mao.bui on 5/19/2018.
@@ -26,7 +28,13 @@ public class NotificationUtils {
     private static final int WATER_REMINDER_NOTIFICATION_ID = 1138;
     private static final int WATER_REMINDER_PENDING_INTENT_ID = 3417;
     private static final String WATER_REMINDER_NOTIFICATION_CHANGE_ID = "reminder_notification_channel";
+    private static final int ACTION_IGNORE_PENDING_INTENT_ID = 111;
+    private static final int ACTION_DRINK_PENDING_INTENT_ID = 112;
 
+    public static void clearAllNotification (Context context) {
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.cancelAll();
+    }
     // TODO (7) Create a method called remindUserBecauseCharging which takes a Context.
     public static void remindUserBecauseCharging (Context context) {
         // This method will create a notification for charging. It might be helpful
@@ -64,6 +72,8 @@ public class NotificationUtils {
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(context.getString(R.string.charging_reminder_notification_body)))
                 .setDefaults(Notification.DEFAULT_VIBRATE)
                 .setContentIntent(contentIntent(context))
+                .addAction(drinWaterAction(context))
+                .addAction(ignoreReminderAction(context))
                 .setAutoCancel(true);
         // TODO (11) If the build version is greater than JELLY_BEAN and lower than OREO,
         // set the notification's priority to PRIORITY_HIGH.
@@ -75,7 +85,39 @@ public class NotificationUtils {
         notificationManager.notify(WATER_REMINDER_NOTIFICATION_ID, builder.build());
     }
 
+    private static NotificationCompat.Action ignoreReminderAction (Context  context) {
+        Intent ignoreReminderIntent  = new Intent(context, WaterReminderIntentService.class);
+        ignoreReminderIntent.setAction(ReminderTasks.ACTION_DISMISS_NOTIFICATION);
 
+        PendingIntent ignoreReminderPendingIntent =
+                PendingIntent.getService(
+                        context,
+                        ACTION_IGNORE_PENDING_INTENT_ID,
+                        ignoreReminderIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT
+                );
+        NotificationCompat.Action action = new NotificationCompat.Action(R.drawable.ic_drink_notification,
+                "No, Thanks",
+                ignoreReminderPendingIntent);
+        return action;
+    }
+
+    private static NotificationCompat.Action drinWaterAction (Context  context) {
+        Intent incrementReminderIntent  = new Intent(context, WaterReminderIntentService.class);
+        incrementReminderIntent.setAction(ReminderTasks.ACTION_INCREMENT_WATER_COUNT);
+
+        PendingIntent ignoreReminderPendingIntent =
+                PendingIntent.getService(
+                        context,
+                        ACTION_DRINK_PENDING_INTENT_ID,
+                        incrementReminderIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT
+                );
+        NotificationCompat.Action action = new NotificationCompat.Action(R.drawable.ic_drink_notification,
+                "I do it!",
+                ignoreReminderPendingIntent);
+        return action;
+    }
     // TODO (1) Create a helper method called contentIntent with a single parameter for a Context. It
     // should return a PendingIntent. This method will create the pending intent which will trigger when
     // the notification is pressed. This pending intent should open up the MainActivity.
