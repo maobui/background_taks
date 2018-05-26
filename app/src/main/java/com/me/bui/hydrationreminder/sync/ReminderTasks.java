@@ -9,8 +9,8 @@ import com.me.bui.hydrationreminder.utils.PreferenceUtilities;
 public class  ReminderTasks {
 // TODO (2) Create a public static constant String called ACTION_INCREMENT_WATER_COUNT
     public static final String ACTION_INCREMENT_WATER_COUNT = "increment-water-count";
-
     public static final String ACTION_DISMISS_NOTIFICATION = "dismiss-notification";
+    public static final String ACTION_CHARGING_REMINDER = "charging-reminder";
 
 // TODO (6) Create a public static void method called executeTask
     public static void executeTask(Context context, String action) {
@@ -21,8 +21,16 @@ public class  ReminderTasks {
             incrementWaterCount(context);
         } else if (ACTION_DISMISS_NOTIFICATION.equals(action)) {
             NotificationUtils.clearAllNotification(context);
+        } else if (ACTION_CHARGING_REMINDER.equals(action)) {
+            issueChargingReminder(context);
         }
     }
+
+    private static void issueChargingReminder(Context context) {
+        PreferenceUtilities.incrementWaterCount(context);
+        NotificationUtils.remindUserBecauseCharging(context);
+    }
+
     public static void incrementWaterCount(Context context) {
 // TODO (3) Create a private static void method called incrementWaterCount
 // TODO (4) Add a Context called context to the argument list
