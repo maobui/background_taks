@@ -42,3 +42,16 @@ https://classroom.udacity.com/courses/ud851/lessons/f5ef4e52-c485-4c85-a26a-3231
 ![](/images/static_broadcast_receiver.png)
 
 ![](/images/static_dynamic_broadcast_receiver.png)
+
+	To simulate the phone being unplugged from usb charging you can use:
+
+	adb shell dumpsys battery set usb 0
+
+	or if you're on a device Android 6.0 or higher you can use:
+
+	adb shell dumpsys battery unplug
+
+	To "plug" the phone back in, just reset it's charging status using:
+
+	adb shell dumpsys battery reset
+
