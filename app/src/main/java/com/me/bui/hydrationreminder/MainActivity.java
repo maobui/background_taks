@@ -115,8 +115,4 @@ public class MainActivity extends AppCompatActivity implements
             updateChargingReminderCount();
         }
     }
-
-    public void testNotification(View view) {
-        NotificationUtils.remindUserBecauseCharging(this);
-    }
 }
