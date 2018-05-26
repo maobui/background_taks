@@ -32,3 +32,13 @@ https://classroom.udacity.com/courses/ud851/lessons/f5ef4e52-c485-4c85-a26a-3231
 ### Scheduling Jobs
 
 ![](/images/scheduling_jobs.png)
+
+### Broadcast Receivers
+
+![](/images/broadcast_receivers.png)
+
+![](/images/intent_filter.png)
+
+![](/images/static_broadcast_receiver.png)
+
+![](/images/static_dynamic_broadcast_receiver.png)
